@@ -10,6 +10,7 @@
                     <div class="brand">
                         <img style="width:39%" th:src="@{/images/logfido.png}"
                              th:href="@{/}" alt="..."/></div>
+                    <li><a th:href="@{/}">Home</a></li>
                     <li><a sec:authorize="!isAuthenticated()"
                            th:href="@{/register}">Register</a></li>
                     <li><a sec:authorize="!isAuthenticated()"
