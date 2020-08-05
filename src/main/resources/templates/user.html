@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/sidebar_left :: sidebar_left"/>
+
+<div class="container">
+
+    <div class="row" style="">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <div class="starter-template">
+                <h4>User page</h4>
+                <button id="toggle-dialogue" type="button" class="btn btn-lg btn-danger" data-toggle="popover"
+                        title="Popover title"
+                        data-content="And here's some amazing content. It's very engaging. Right?">
+                    Click to toggle popover
+                </button>
+                <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- /.container -->
+
+</body>
+<script>
+    $( "#toggle-dialogue" ).click(function() {
+     $('#toggle-dialogue').delay( 800 ).fadeIn( 1000 ).popover('show');
+
+
+});
+
+</script>
+</html>

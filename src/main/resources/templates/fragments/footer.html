@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+<div th:fragment="footer">
+
+    <div id="footer" class="container">
+        <footer>
+            <!-- this is footer -->
+            <span>
+
+             </span>
+            <div class="footer-copyright text-center py-3">
+            <span sec:authorize="isAuthenticated()">
+                <div class="col">
+
+                    <hr></hr>
+                     <div id="logo" class="col">
+                <img style="width:5%" th:src="@{/images/logfido.png}" th:href="@{/}"
+                     alt="..."/>
+                </div>
+
+
+                | Logged user: <span sec:authentication="name"></span> |
+                Roles: <span sec:authentication="principal.authorities"></span> |
+                <a th:href="@{/logout}">Sign Out</a>
+                </div>
+
+
+               POWERED BY FIDOTEAM © 2020
+
+
+            </span>
+                <span sec:authorize="!isAuthenticated()">
+
+               POWERED BY FIDOTEAM © 2020 |
+                <a th:href="@{/login}">Sign in</a>
+            </span>
+            </div>
+        </footer>
+    </div>
+
+</div>
+</body>
+</html>

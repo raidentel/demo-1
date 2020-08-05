@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="sidebar_left">
+
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <!-- sidebar -->
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                <ul class="nav">
+                    <li><a sec:authorize="!isAuthenticated()"
+                           th:href="@{/register}">Register</a></li>
+                    <li><a sec:authorize="!isAuthenticated()"
+                           th:href="@{/login}">Login page</a></li>
+
+                    <li><a sec:authorize="hasAuthority('USER')" th:href="@{/user/dashboard}">User Dashboard</a></li>
+                    <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}">Administration</a></li>
+                    <li><a sec:authorize="isAuthenticated()"
+                           th:href="@{/logout}">Logout</a></li>
+                    <li><a th:href="@{#}">FAQ</a></li>
+                    <li><a th:href="@{#}">Contact</a></li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!--/.row-->
+        <div class="row footer">
+            <div th:replace="fragments/footer :: footer"/>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
