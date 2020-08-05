@@ -15,8 +15,8 @@
                            th:href="@{/register}">Register</a></li>
                     <li><a sec:authorize="!isAuthenticated()"
                            th:href="@{/login}">Login page</a></li>
-
-                    <li><a sec:authorize="hasAuthority('USER')" th:href="@{/user/dashboard}">User Dashboard</a></li>
+                    <li><a sec:authorize="hasAuthority('USER')" th:href="@{/user/}">User space</a></li>
+                    <li><a sec:authorize="hasAuthority('USER')" th:href="@{/user/dashboard}">Dashboard</a></li>
                     <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}">Administration</a></li>
                     <li><a sec:authorize="isAuthenticated()"
                            th:href="@{/logout}">Logout</a></li>

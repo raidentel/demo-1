@@ -28,7 +28,7 @@ public class UserDto {
     private String profile;
     private String gender;
     private String telephone;
-    private List<RoleDto> roles = Lists.newArrayList(RoleDto.builder().id(1L).build());
+    private List<RoleDto> roles = Lists.newArrayList(RoleDto.builder().id(2L).build());
     private boolean enabled = true;
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
