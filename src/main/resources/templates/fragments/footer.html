@@ -17,7 +17,7 @@
                 <div class="col">
 
                     <hr></hr>
-                     <div id="logo" class="col">
+                     <div class="col">
                 <img style="width:5%" th:src="@{/images/logfido.png}" th:href="@{/}"
                      alt="..."/>
                 </div>
@@ -34,6 +34,11 @@
 
             </span>
                 <span sec:authorize="!isAuthenticated()">
+                    <hr></hr>
+                     <div class="col">
+                <img style="width:5%" th:src="@{/images/logfido.png}" th:href="@{/}"
+                     alt="..."/>
+                </div>
 
                POWERED BY FIDOTEAM © 2020 |
                 <a th:href="@{/login}">Sign in</a>
