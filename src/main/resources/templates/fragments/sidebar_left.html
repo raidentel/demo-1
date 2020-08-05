@@ -7,6 +7,9 @@
             <!-- sidebar -->
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
                 <ul class="nav">
+                    <div class="brand">
+                        <img style="width:39%" th:src="@{/images/logfido.png}"
+                             th:href="@{/}" alt="..."/></div>
                     <li><a sec:authorize="!isAuthenticated()"
                            th:href="@{/register}">Register</a></li>
                     <li><a sec:authorize="!isAuthenticated()"
