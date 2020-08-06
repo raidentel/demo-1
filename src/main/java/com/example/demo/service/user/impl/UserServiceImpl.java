@@ -47,13 +47,19 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public UserDto getUserDtoByUsername(String username) {
         final Optional<Users> user = userDao.getByUsername(username);
         if (user.isPresent()) {
             return userMapper.mapUsertoDTO(user.get());
         } else {
-            return null;
+            throw new UsernameNotFoundException("User Not found");
         }
+    }
+
+    @Override
+    public UserDto checkUsernameExists(String username) {
+        return userMapper.mapUsertoDTO(userDao.getByUsernameNullable(username));
     }
 }

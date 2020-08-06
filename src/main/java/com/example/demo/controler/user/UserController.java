@@ -2,14 +2,19 @@ package com.example.demo.controler.user;
 
 import com.example.demo.dto.user.UserDto;
 import com.example.demo.service.user.IUserService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -27,7 +32,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String registrationForm(Model model) {
-        model.addAttribute("user", new UserDto());
+        model.addAttribute("user", UserDto.builder().profile("USER").build());
         return "/register";
     }
 
@@ -37,19 +42,70 @@ public class UserController {
         return "/dashboard";
     }
 
+//    @GetMapping("/user/username")
+//    public String checkUsernameExists(@ModelAttribute("user") UserDto user,
+//                                                 BindingResult bindingResult,
+//                                                 Model model, Errors errors ) {
+//
+//
+//        final String exist = userService.checkUsernameExists(user.getUsername());
+//        if (exist != null && exist.isEmpty()) {
+//        } else {
+//            return "/fragments/alert";
+//        }
+//        return "/#";
+//    }
 
+//    @RequestMapping(value = "/user/username", method = RequestMethod.POST,
+//            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+//            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//    public UserDto checkUsernameExists(@RequestBody UserDto user, Model model) {
+//
+//        final String exist = userService.checkUsernameExists(user.getUsername());
+//        if (exist != null && exist.isEmpty()) {
+//        } else {
+//            model.addAttribute("user", UserDto.builder().username(exist).profile("USER").build());
+//            return user;
+//        }
+//        return user;
+//    }
+
+
+    @RequestMapping(value = "/user/username/",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> checkUsernameExists(Model model, @RequestBody UserDto user) {
+
+        final UserDto exist = userService.checkUsernameExists(user.getUsername());
+        if (exist == null) {
+            return ResponseEntity.ok().body(new Gson().toJson(user));
+        } else {
+            return ResponseEntity.badRequest().body(new Gson().toJson(user));
+        }
+
+    }
+
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") @Valid UserDto user,
-                           Model model) {
+    public String register(@ModelAttribute("user") @Valid UserDto user, BindingResult result,
+                           Model model, Errors errors) {
+
+
+        if (result.hasErrors()) {
+            return "/register";
+        }
         user.setPassword(encoder.encode(user.getPassword()));
         String existedUsername;
-        if (userService.getUserDtoByUsername(user.getUsername()) != null) {
+        if (userService.checkUsernameExists(user.getUsername()) != null) {
             existedUsername = user.getUsername();
             model.addAttribute("existedUsername", existedUsername);
             return "/register";
         } else {
             final UserDto userSubmited = userService.create(user);
-            model.addAttribute("user", userSubmited);
+            final UserDto created = userService.getById(userSubmited.getId());
+            model.addAttribute("user", created);
             return "/success";
         }
     }

@@ -26,4 +26,5 @@ public class DemoConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

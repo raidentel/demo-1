@@ -1,112 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
+<header>
     <title>Registration page - Fidoteam </title>
     <div th:replace="fragments/header :: header-css"/>
     <div th:replace="fragments/header :: header"/>
-</head>
+</header>
 <body>
 
 <div th:replace="fragments/sidebar_left :: sidebar_left"/>
-<div th:replace="fragments/menu_bar :: menu_bar"/>
+<!--<div th:replace="fragments/menu_bar :: menu_bar"/>-->
+<div th:replace="fragments/registration :: registration"/>
 
-<div class="container">
-    <div class="row" style="margin-top:20px">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form th:action="@{/register}" method="post" th:object="${user}">
-                <fieldset>
-                    <h1>Registration</h1>
-
-                    <div th:if="${param.error}">
-                        <div class="alert alert-danger">
-                            Invalid username and password.
-                        </div>
-                    </div>
-                    <div th:if="${param.logout}">
-                        <div class="alert alert-info">
-                            You have been logged out.
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" name="username" id="username" class="form-control input-lg"
-                               placeholder="UserName" required="true" autofocus="true"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control input-lg"
-                               placeholder="Password" required="true"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" name="firstname" id="firstname" class="form-control input-lg"
-                               placeholder="Firstname" autofocus="true"/>
-                    </div>
-
-
-                    <div class="form-group">
-                        <input type="text" name="lastname" id="lastname" class="form-control input-lg"
-                               placeholder="Lastname" autofocus="true"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" name="telephone" id="telephone" class="form-control input-lg"
-                               placeholder="telephone" autofocus="true"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="gender">Choose your profile</label>
-                        <select class="form-control selectpicker" th:field="*{profile}" id="profile">
-                            <option value="">Please select one</option>
-                            <option th:each="profile : ${T(com.example.demo.dto.user.enums.Profile).values()}"
-                                    th:value="${profile}"
-                                    th:text="${profile}">
-                            </option>
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="gender">Choose your gender</label>
-                        <select class="form-control selectpicker" th:field="*{gender}" id="gender">
-                            <option value="">Please select one</option>
-                            <option th:each="gender : ${T(com.example.demo.dto.user.enums.Gender).values()}"
-                                    th:value="${gender}"
-                                    th:text="${gender}">
-                            </option>
-
-                        </select>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Register"/>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="form-group" id="alert">
-
-                    <div th:if="${existedUsername != null}" class="alert alert-danger notification" role="alert">
-                        <button id="button-alert" type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <p th:text="${existedUsername}"></p><p> already exists</p>
-                    </div>
-
-                    </div>
-
-
-
-                </fieldset>
-            </form>
-        </div>
-    </div>
-
-</div>
-<!-- /.container -->
 
 
 
@@ -118,6 +22,9 @@
 });
 
 </script>
+
+
+<script src="js/check_username.js"/>
 
 
 </body>

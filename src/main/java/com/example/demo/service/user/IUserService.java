@@ -12,4 +12,6 @@ public interface IUserService {
     Users getByUsername(String username);
 
     UserDto getUserDtoByUsername(String username);
+
+    UserDto checkUsernameExists(String username);
 }
