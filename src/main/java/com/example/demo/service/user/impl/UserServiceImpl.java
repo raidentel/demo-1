@@ -39,7 +39,7 @@ public class UserServiceImpl implements IUserService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public Users getByUsername(String username) {
-        final Optional<Users> user = userDao.getByUsername(username);
+        final Optional<Users> user = userDao.findByUsernameIgnoreCase(username);
         if (user.isPresent()) {
             return user.get();
         } else {
@@ -50,7 +50,7 @@ public class UserServiceImpl implements IUserService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public UserDto getUserDtoByUsername(String username) {
-        final Optional<Users> user = userDao.getByUsername(username);
+        final Optional<Users> user = userDao.findByUsernameIgnoreCase(username);
         if (user.isPresent()) {
             return userMapper.mapUsertoDTO(user.get());
         } else {
@@ -60,6 +60,6 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserDto checkUsernameExists(String username) {
-        return userMapper.mapUsertoDTO(userDao.getByUsernameNullable(username));
+        return userMapper.mapUsertoDTO(userDao.findByUsernameIgnoreCaseNullable(username));
     }
 }

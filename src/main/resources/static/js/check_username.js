@@ -3,6 +3,11 @@ $( document ).ready(function() {
     $("#alert-registration-id").hide();
 });
 
+$( "#alert-errors" ).click(function() {
+     $( "#alert-errors" ).slideUp( 300 ).delay( 800 ).fadeIn( 400 );
+
+});
+
 document.getElementById("username").oninput = function() {
 checkUsername()
 };

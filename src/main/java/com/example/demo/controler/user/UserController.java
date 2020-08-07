@@ -15,8 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -42,34 +44,6 @@ public class UserController {
         return "/dashboard";
     }
 
-//    @GetMapping("/user/username")
-//    public String checkUsernameExists(@ModelAttribute("user") UserDto user,
-//                                                 BindingResult bindingResult,
-//                                                 Model model, Errors errors ) {
-//
-//
-//        final String exist = userService.checkUsernameExists(user.getUsername());
-//        if (exist != null && exist.isEmpty()) {
-//        } else {
-//            return "/fragments/alert";
-//        }
-//        return "/#";
-//    }
-
-//    @RequestMapping(value = "/user/username", method = RequestMethod.POST,
-//            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-//            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    public UserDto checkUsernameExists(@RequestBody UserDto user, Model model) {
-//
-//        final String exist = userService.checkUsernameExists(user.getUsername());
-//        if (exist != null && exist.isEmpty()) {
-//        } else {
-//            model.addAttribute("user", UserDto.builder().username(exist).profile("USER").build());
-//            return user;
-//        }
-//        return user;
-//    }
-
 
     @RequestMapping(value = "/user/username/",
             method = RequestMethod.POST,
@@ -90,10 +64,12 @@ public class UserController {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @PostMapping("/register")
     public String register(@ModelAttribute("user") @Valid UserDto user, BindingResult result,
-                           Model model, Errors errors) {
+                           Errors errors, RedirectAttributes atts, Model model) {
 
 
         if (result.hasErrors()) {
+            model.addAttribute("errors",
+                    result.getFieldErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList()));
             return "/register";
         }
         user.setPassword(encoder.encode(user.getPassword()));

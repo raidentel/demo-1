@@ -12,11 +12,8 @@ import java.util.Optional;
 public interface UserDao extends JpaRepository<Users, Long> {
 
     @Query("select u from Users u where u.username =:username")
-    Optional<Users> getByUsername(@Param("username") String username);
+    Optional<Users> findByUsernameIgnoreCase(@Param("username") String username);
 
-    @Query("select u.username from Users u where u.username Like %:username")
-    Optional<String> findByUsername(@Param("username") String username);
-
-    @Query("select u from Users u where u.username =:username")
-    Users getByUsernameNullable(@Param("username") String username);
+    @Query("select u from Users u where upper(u.username) =:username or lower(u.username) =:username")
+    Users findByUsernameIgnoreCaseNullable(@Param("username") String username);
 }

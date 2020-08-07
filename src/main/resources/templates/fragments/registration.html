@@ -7,7 +7,7 @@
 
 <script src="js/check_username.js"/>
 </header>
-<div th:fragment="registration" class="container-fluid text-center">
+<div th:fragment="registration" class="container-fluid">
     <div id="form" class="container">
         <div class="row" style="margin-top:20px">
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
@@ -15,22 +15,6 @@
                     <fieldset>
                         <h1>Registration</h1>
 
-                        <div id="alert-registration-id">
-                            <div th:replace="fragments/alert :: alert"/>
-                        </div>
-
-                        <!--<div th:if="${#fields.hasErrors('*')}">errors</div>-->
-
-                        <div th:if="${param.error}">
-                            <div class="alert alert-danger">
-                                Invalid username and password.
-                            </div>
-                        </div>
-                        <div th:if="${param.logout}">
-                            <div class="alert alert-info">
-                                You have been logged out.
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label for="username">Username :</label>
@@ -43,9 +27,8 @@
                                    required="true"
                                    autofocus="true" autocomplete="on"/>
                             <br/>
-
-
                         </div>
+
 
                         <div class="form-group">
                             <input type="password" name="password" id="password" class="form-control input-lg"
@@ -98,19 +81,12 @@
                             </div>
                         </div>
 
-
-                        <div class="form-group" id="alert">
-
-                            <div th:if="${existedUsername != null}" class="alert alert-danger notification"
+                        <div class="form-group" id="alert-errors">
+                            <div th:if="${errors!=null and !errors.empty}" class="alert alert-danger notification"
                                  role="alert">
-                                <button id="button-alert" type="button" class="close" data-dismiss="alert"
-                                        aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <p th:text="${existedUsername}"></p>
-                                <p> already exists</p>
+                                <p th:each="err : ${errors}" th:text="${err.toString()}"></p>
+                                <p> already exists hamdoullah</p>
                             </div>
-
                         </div>
 
 
@@ -121,7 +97,6 @@
 
     </div>
 </div>
-
 </html>
 
 

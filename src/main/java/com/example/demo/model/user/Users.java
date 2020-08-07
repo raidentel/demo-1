@@ -1,8 +1,6 @@
 package com.example.demo.model.user;
 
-import com.example.demo.config.BCryptManagerUtil;
 import com.example.demo.model.authority.Roles;
-import com.google.common.collect.Lists;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -22,7 +20,10 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
+@Table(
+        uniqueConstraints = {@UniqueConstraint(columnNames = "username")},
+        indexes = @Index(columnList = "username")
+)
 public class Users implements Serializable, UserDetails {
 
     @Id

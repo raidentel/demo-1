@@ -34,7 +34,7 @@ spring.datasource:
   driverClassName: org.postgresql.Driver
 spring.jpa:
   database-platform=: org.hibernate.dialect.PostgreSQLDialect
-  hibernate.ddl-auto: none
+  hibernate.ddl-auto: validate
   show-sql: true
 
 logging.level.org.springframework.security: DEBUG

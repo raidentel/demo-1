@@ -1,6 +1,7 @@
 package com.example.demo.dto.user;
 
 
+import com.example.demo.validator.EmailValid;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.collect.Lists;
@@ -24,12 +25,13 @@ public class UserDto implements Serializable {
     private Long id;
     @NotNull
     @NotEmpty
+    @EmailValid
     private String username;
     @NotNull
     @NotEmpty
     private String password;
 
-//    @NotNull
+    //    @NotNull
 //    @Size(min = 4, message = "Must be at least 4 characters")
     private String firstname;
     private String lastname;

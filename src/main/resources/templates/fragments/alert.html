@@ -4,7 +4,11 @@
 
 <div th:fragment="alert" class="container-fluid text-center" id="alert-reda">
 
-    <div class="alert alert-danger">Error</div>
+    <div th:if="${#errors != null}">
+        <div class="alert alert-danger">
+            <p th:each="err : ${#lists}" th:text="${err}">reda</p>
+        </div>
+    </div>
 
 </div>
 </html>

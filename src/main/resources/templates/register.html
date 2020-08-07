@@ -8,22 +8,9 @@
 <body>
 
 <div th:replace="fragments/sidebar_left :: sidebar_left"/>
+<div th:replace="fragments/menu_bar :: menu_bar"/>
 <!--<div th:replace="fragments/menu_bar :: menu_bar"/>-->
 <div th:replace="fragments/registration :: registration"/>
-
-
-
-
-<script>
-
-    $( "#button-alert" ).click(function() {
-     $( "#alert" ).slideUp( 300 ).delay( 800 ).fadeIn( 400 );
-
-});
-
-</script>
-
-
 <script src="js/check_username.js"/>
 
 
