@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EmailUnique {
-    String message() default "Username not unique.";
+    String message() default "Email already exists.";
 
     Class<?>[] groups() default {};
 
