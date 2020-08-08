@@ -1,7 +1,6 @@
 package com.example.demo.controler.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,11 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
+@Slf4j
 @Component
 public class SecurityAccessDeniedHandler implements AccessDeniedHandler {
-
-    private static Logger logger = LoggerFactory.getLogger(SecurityAccessDeniedHandler.class);
 
     @Override
     public void handle(HttpServletRequest httpServletRequest,
@@ -28,7 +25,7 @@ public class SecurityAccessDeniedHandler implements AccessDeniedHandler {
                 = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null) {
-            logger.info("User '" + auth.getName()
+            LOGGER.info("User '" + auth.getName()
                     + "' attempted to access the protected URL: "
                     + httpServletRequest.getRequestURI());
         }

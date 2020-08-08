@@ -1,14 +1,15 @@
 package com.example.demo.dto.user;
 
 
+import com.example.demo.validator.EmailUnique;
 import com.example.demo.validator.EmailValid;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.collect.Lists;
 import lombok.*;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,22 +18,23 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Validated
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class UserDto implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    @NotNull
-    @NotEmpty
+
+    @Size(min = 8, message = "Must be at least 8 characters")
     @EmailValid
+    @EmailUnique
     private String username;
-    @NotNull
-    @NotEmpty
+
+    @Size(min = 8, message = "Must be at least 8 characters")
     private String password;
 
-    //    @NotNull
-//    @Size(min = 4, message = "Must be at least 4 characters")
     private String firstname;
     private String lastname;
     private String profile;

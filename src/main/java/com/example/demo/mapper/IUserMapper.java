@@ -11,19 +11,6 @@ public interface IUserMapper {
 
     IUserMapper INSTANCE = Mappers.getMapper( IUserMapper.class );
 
-    /**
-     * Map User dto to User entity.
-     *
-     * @param userDto
-     * @return User
-     */
     Users mapDTOtoUser(UserDto userDto);
-
-    /**
-     * Map User dto to User entity.
-     *
-     * @param user
-     * @return UserDto
-     */
     UserDto mapUsertoDTO(Users user);
 }

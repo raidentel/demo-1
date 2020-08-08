@@ -3,13 +3,13 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <div th:fragment="footer">
     <h6>
-    <div id="footer" class="container">
-        <footer>
-            <!-- this is footer -->
-            <span>
+        <div id="footer" class="container">
+            <footer>
+                <!-- this is footer -->
+                <span>
 
              </span>
-            <div class="footer-copyright text-center py-3">
+                <div class="footer-copyright text-center py-3">
             <span sec:authorize="isAuthenticated()">
                 <div class="col">
 
@@ -30,7 +30,7 @@
 
 
             </span>
-                <span sec:authorize="!isAuthenticated()">
+                    <span sec:authorize="!isAuthenticated()">
                     <hr></hr>
                      <div class="col">
                 <img style="width:5%" th:src="@{/images/logfido.png}" th:href="@{/}"
@@ -40,9 +40,9 @@
                POWERED BY FIDOTEAM © 2020 |
                 <a th:href="@{/login}">Sign-in</a>
             </span>
-            </div>
-        </footer>
-    </div>
+                </div>
+            </footer>
+        </div>
     </h6>
 </div>
 </html>

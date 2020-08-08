@@ -1,16 +1,14 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <header>
     <div th:replace="fragments/header :: header-css"/>
     <div th:replace="fragments/header :: header"/>
 </header>
 <body>
-
 <div th:replace="fragments/sidebar_left :: sidebar_left"/>
 <div th:replace="fragments/menu_bar :: menu_bar"/>
 
 <div class="container">
-
     <div class="row" style="">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <div class="starter-template">
@@ -24,18 +22,7 @@
             </div>
         </div>
     </div>
-
-
 </div>
 <!-- /.container -->
-
 </body>
-<script>
-    $( "#toggle-dialogue" ).click(function() {
-     $('#toggle-dialogue').delay( 800 ).fadeIn( 1000 ).popover('show');
-
-
-});
-
-</script>
 </html>

@@ -1,18 +1,21 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <header>
-    <title>Registration page - Fidoteam </title>
+    <title>Registration page - Fidoteam</title>
     <div th:replace="fragments/header :: header-css"/>
     <div th:replace="fragments/header :: header"/>
+    <script src="js/check_username.js"/>
+    <script scr="js/close_alert.js"/>
+    <script>
+        function onClickOnAlert() {
+$('#alert-div').hide();}
+
+    </script>
 </header>
 <body>
-
 <div th:replace="fragments/sidebar_left :: sidebar_left"/>
 <div th:replace="fragments/menu_bar :: menu_bar"/>
 <!--<div th:replace="fragments/menu_bar :: menu_bar"/>-->
 <div th:replace="fragments/registration :: registration"/>
-<script src="js/check_username.js"/>
-
-
 </body>
 </html>

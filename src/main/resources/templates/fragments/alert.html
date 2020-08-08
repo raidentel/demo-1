@@ -2,15 +2,24 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 
-<div th:fragment="alert" class="container-fluid text-center" id="alert-reda">
-
-    <div th:if="${#errors != null}">
-        <div class="alert alert-danger">
-            <p th:each="err : ${#lists}" th:text="${err}">reda</p>
+<body>
+<div th:fragment="alert" class="container-fluid text-center" id="alert-id">
+    <hr></hr>
+    <div class="form-group">
+        <div onclick="onClickOnAlert()">
+            <div th:if="${errors!=null and !errors.empty}" class="alert alert-danger notification">
+                <div>
+                    <h6 th:each="err : ${errors}" th:text="${err.toString()}">.</h6>
+                </div>
+            </div>
         </div>
     </div>
 
 </div>
+</body>
+<script>
+
+</script>
 </html>
 
 

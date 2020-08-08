@@ -1,6 +1,5 @@
 package com.example.demo.controler;
 
-import com.example.demo.dto.user.UserDto;
 import com.example.demo.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
